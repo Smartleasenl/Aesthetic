@@ -112,7 +112,7 @@ export default function PortfolioPage() {
       </div>
 
       {/* FILTER */}
-      <div style={{ background: '#F0EDE6', borderBottom: '1px solid #DDD8CF', padding: '1.2rem clamp(1.5rem,5vw,5rem)', position: 'sticky', top: '80px', zIndex: 40 }}>
+      <div style={{ background: '#F0EDE6', borderBottom: '1px solid #DDD8CF', padding: '1.2rem clamp(1.5rem,5vw,5rem)' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', gap: '.5rem', flexWrap: 'wrap' }}>
           {CATS.map(c => (
             <button key={c} onClick={() => setActive(c)}
