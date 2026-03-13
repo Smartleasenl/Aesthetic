@@ -2,16 +2,15 @@ import { ArrowRight } from 'lucide-react';
 import { useEffect, useState, useRef, useCallback } from 'react';
 
 /* ─── IMAGES ─── */
+// imgi_10 = blurry ZA magazine logo mock → NOOIT gebruiken
 const IMG = {
-  shopifyBag:    '/images/imgi_1_6913753829bad145499fa973.jpg',
-  womanWindow:   '/images/imgi_3_6910d742b133d15c1ee8b05f.png',
-  womanLaptop:   '/images/imgi_4_6910e2aed4e8026a1b652185.png',
-  linen:         '/images/imgi_5_6910ea39d1ba958698daa8e8.png',
-  brandDetail:   '/images/imgi_6_6910f37148a60028a9b8abfe.png',
-  workspace:     '/images/imgi_7_6910fb1675ec1e391438b35f.png',
-  foundersCouch: '/images/imgi_10_69111394c3a1ea691a145f75.png',
-  gizemSolo:     '/images/imgi_11_69111394d4d779cc917e287b.png',
-  portMock2:     '/images/imgi_64_6910fbdf0d255178af45837a.png',
+  shopifyBag:  '/images/imgi_1_6913753829bad145499fa973.jpg',
+  womanWindow: '/images/imgi_3_6910d742b133d15c1ee8b05f.png',
+  womanLaptop: '/images/imgi_4_6910e2aed4e8026a1b652185.png',
+  linen:       '/images/imgi_5_6910ea39d1ba958698daa8e8.png',
+  brandDetail: '/images/imgi_6_6910f37148a60028a9b8abfe.png',
+  workspace:   '/images/imgi_7_6910fb1675ec1e391438b35f.png',
+  gizemSolo:   '/images/imgi_11_69111394d4d779cc917e287b.png',
 };
 
 /* ─── CUSTOM CURSOR ─── */
@@ -265,7 +264,7 @@ function ImageReel() {
     <div style={{ display:'grid', gridTemplateColumns:'1.3fr 1fr .7fr .9fr', height:'clamp(240px,35vw,480px)', gap:'2px', background:'#C4B9A8' }}>
       {[
         { src: IMG.womanLaptop,   pos: 'top center' },
-        { src: IMG.foundersCouch, pos: 'top center' },
+        { src: IMG.brandDetail, pos: 'center' },
         { src: IMG.linen,         pos: 'center'     },
         { src: IMG.workspace,     pos: 'center'     },
       ].map(({ src, pos }, i) => (
@@ -406,38 +405,46 @@ function Founders() {
   const { ref, vis } = useReveal();
   return (
     <section ref={ref} style={{ display:'grid' }} className="found-grid">
-      {/* IMAGE SIDE */}
-      <div style={{ position:'relative', overflow:'hidden', minHeight:'clamp(500px,60vw,800px)' }}>
-        <img src={IMG.foundersCouch} style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'top center', display:'block', transform: vis?'scale(1)':'scale(1.08)', transition:'transform 1.4s cubic-bezier(.16,1,.3,1)' }} />
-        <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top,rgba(0,0,0,.4) 0%,transparent 60%)' }} />
-        {/* badge */}
-        <div style={{ position:'absolute', top:'2rem', left:'2rem', background:'rgba(61,52,38,.88)', backdropFilter:'blur(16px)', padding:'.5rem 1.1rem', border:'1px solid rgba(197,212,192,.15)' }}>
-          <span style={{ fontFamily:"'Jost',sans-serif", fontSize:'.5rem', letterSpacing:'.25em', textTransform:'uppercase', color:'#C5D4C0', fontWeight:500 }}>The Founders</span>
+
+      {/* LEFT: twee gestapelde foto's — Gizem boven, workspace onder */}
+      <div style={{ display:'grid', gridTemplateRows:'1.4fr 1fr', gap:'3px', minHeight:'clamp(500px,60vw,760px)', overflow:'hidden' }}>
+        <div style={{ overflow:'hidden', position:'relative' }}>
+          <img src={IMG.gizemSolo}
+            style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'top center', display:'block',
+              transform: vis?'scale(1)':'scale(1.06)', transition:'transform 1.4s cubic-bezier(.16,1,.3,1)' }} />
+          <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top,rgba(8,6,4,.35) 0%,transparent 50%)' }} />
+          <div style={{ position:'absolute', top:'1.8rem', left:'1.8rem', background:'rgba(61,52,38,.85)', backdropFilter:'blur(12px)', padding:'.45rem 1rem', border:'1px solid rgba(197,212,192,.12)' }}>
+            <span style={{ fontFamily:"'Jost',sans-serif", fontSize:'.48rem', letterSpacing:'.22em', textTransform:'uppercase', color:'#C5D4C0', fontWeight:500 }}>The Founders</span>
+          </div>
         </div>
-        {/* floating portrait */}
-        <div style={{ position:'absolute', bottom:'2.5rem', right:'2.5rem', width:'clamp(80px,11vw,140px)', border:'3px solid #F0EDE6', overflow:'hidden', boxShadow:'0 20px 60px rgba(0,0,0,.4)', opacity: vis?1:0, transform: vis?'translateY(0)':'translateY(20px)', transition:'all 1s ease .4s' }}>
-          <img src={IMG.gizemSolo} style={{ width:'100%', aspectRatio:'3/4', objectFit:'cover', display:'block' }} />
+        <div style={{ overflow:'hidden' }}>
+          <img src={IMG.womanLaptop}
+            style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'center 30%', display:'block',
+              transform: vis?'scale(1)':'scale(1.06)', transition:'transform 1.6s cubic-bezier(.16,1,.3,1) .15s' }} />
         </div>
       </div>
 
-      {/* TEXT SIDE */}
-      <div style={{ background:'#3D3426', padding:'clamp(4rem,7vw,8rem) clamp(2.5rem,6vw,7rem)', display:'flex', flexDirection:'column', justifyContent:'center', opacity: vis?1:0, transform: vis?'none':'translateX(40px)', transition:'all 1.1s cubic-bezier(.16,1,.3,1) .15s' }}>
+      {/* RIGHT: tekst */}
+      <div style={{ background:'#3D3426', padding:'clamp(4rem,7vw,8rem) clamp(2.5rem,6vw,7rem)', display:'flex', flexDirection:'column', justifyContent:'center',
+        opacity: vis?1:0, transform: vis?'none':'translateX(40px)', transition:'all 1.1s cubic-bezier(.16,1,.3,1) .2s' }}>
         <span style={{ fontFamily:"'Jost',sans-serif", fontSize:'.58rem', fontWeight:500, letterSpacing:'.25em', textTransform:'uppercase', color:'#8FA887', display:'block', marginBottom:'2rem' }}>Meet The Team</span>
-        <h2 style={{ fontFamily:"'Cormorant Garamond',serif", fontWeight:400, fontSize:'clamp(3rem,5vw,5.5rem)', color:'#F0EDE6', lineHeight:.88, letterSpacing:'-.025em', margin:'0 0 .15em' }}>Baris</h2>
+        <h2 style={{ fontFamily:"'Cormorant Garamond',serif", fontWeight:400, fontSize:'clamp(3rem,5vw,5.5rem)', color:'#F0EDE6', lineHeight:.88, letterSpacing:'-.025em', margin:'0 0 .12em' }}>Baris</h2>
         <h2 style={{ fontFamily:"'Cormorant Garamond',serif", fontWeight:300, fontStyle:'italic', fontSize:'clamp(3rem,5vw,5.5rem)', color:'#C5D4C0', lineHeight:.88, letterSpacing:'-.025em', margin:'0 0 2.5rem' }}>&amp; Gizem.</h2>
-        <div style={{ width:'2.5rem', height:'1px', background:'rgba(197,212,192,.2)', marginBottom:'2.5rem' }} />
+        <div style={{ width:'2.5rem', height:'1px', background:'rgba(197,212,192,.18)', marginBottom:'2.5rem' }} />
         {[
           'Ik ben Baris, oprichter van Aesthetic Social Haus. Na jaren in de e-commerce wereld ontdekte ik dat veel bedrijven zich focussen op mooie content, maar de strategie erachter missen.',
           'Niet lang daarna sloot Gizem zich aan — mijn vrouw en het creatieve hart achter het merk. Met haar oog voor detail brengt ze onze ideeën tot leven.',
           'Samen bouwen we dagelijks aan merken die opvallen, onthouden worden en vertrouwen uitstralen.',
         ].map((t,i) => (
-          <p key={i} style={{ fontFamily:"'Jost',sans-serif", fontWeight:300, fontSize:'.88rem', color:'rgba(197,212,192,.55)', lineHeight:1.9, margin:'0 0 1rem' }}>{t}</p>
+          <p key={i} style={{ fontFamily:"'Jost',sans-serif", fontWeight:300, fontSize:'.88rem', color:'rgba(197,212,192,.52)', lineHeight:1.9, margin:'0 0 1rem' }}>{t}</p>
         ))}
         <button
           onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior:'smooth' })}
           onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background='#8FA887'; }}
           onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background='#C5D4C0'; }}
-          style={{ display:'inline-flex', alignItems:'center', gap:'.7rem', background:'#C5D4C0', color:'#080604', padding:'1rem 2rem', fontFamily:"'Jost',sans-serif", fontSize:'.63rem', fontWeight:700, letterSpacing:'.2em', textTransform:'uppercase', border:'none', cursor:'pointer', transition:'background .3s ease', width:'fit-content', marginTop:'1.5rem' }}>
+          style={{ display:'inline-flex', alignItems:'center', gap:'.7rem', background:'#C5D4C0', color:'#080604', padding:'1rem 2rem',
+            fontFamily:"'Jost',sans-serif", fontSize:'.63rem', fontWeight:700, letterSpacing:'.2em', textTransform:'uppercase',
+            border:'none', cursor:'pointer', transition:'background .3s ease', width:'fit-content', marginTop:'1.5rem' }}>
           Werk Met Ons <ArrowRight size={12} />
         </button>
       </div>
