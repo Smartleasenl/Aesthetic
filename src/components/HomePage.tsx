@@ -17,12 +17,18 @@ function Cursor() {
   const ring  = useRef<HTMLDivElement>(null);
   const pos   = useRef({ x: 0, y: 0 });
   const ring_ = useRef({ x: 0, y: 0 });
+  const [isTouch, setIsTouch] = useState(false);
 
   useEffect(() => {
+    // Verberg cursor op touch/mobiel devices
+    const checkTouch = () => setIsTouch(true);
+    window.addEventListener('touchstart', checkTouch, { once: true });
+
     const move = (e: MouseEvent) => {
       pos.current = { x: e.clientX, y: e.clientY };
       if (dot.current) {
         dot.current.style.transform = `translate(${e.clientX - 4}px,${e.clientY - 4}px)`;
+        dot.current.style.opacity = '1';
       }
     };
     window.addEventListener('mousemove', move);
@@ -37,8 +43,15 @@ function Cursor() {
       af = requestAnimationFrame(tick);
     };
     tick();
-    return () => { window.removeEventListener('mousemove', move); cancelAnimationFrame(af); };
+    return () => {
+      window.removeEventListener('touchstart', checkTouch);
+      window.removeEventListener('mousemove', move);
+      cancelAnimationFrame(af);
+    };
   }, []);
+
+  // Niet renderen op touch devices
+  if (isTouch) return null;
 
   return (
     <>
@@ -46,6 +59,7 @@ function Cursor() {
         position:'fixed',top:0,left:0,width:8,height:8,borderRadius:'50%',
         background:'#C5D4C0',pointerEvents:'none',zIndex:9999,
         mixBlendMode:'difference',willChange:'transform',
+        opacity: 0, transition:'opacity .3s',
       }} />
       <div ref={ring} style={{
         position:'fixed',top:0,left:0,width:40,height:40,borderRadius:'50%',
