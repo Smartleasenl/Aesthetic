@@ -350,17 +350,25 @@ const SVC_DATA = [
 function Services() {
   const [hov, setHov] = useState<number | null>(null);
   const [imgPos, setImgPos] = useState({ x: 0, y: 0 });
+  const [isTouch, setIsTouch] = useState(false);
   const { ref, vis } = useReveal();
 
-  const onMove = useCallback((e: React.MouseEvent) => {
-    setImgPos({ x: e.clientX + 20, y: e.clientY - 80 });
+  useEffect(() => {
+    const fn = () => setIsTouch(true);
+    window.addEventListener('touchstart', fn, { once: true });
+    return () => window.removeEventListener('touchstart', fn);
   }, []);
+
+  const onMove = useCallback((e: React.MouseEvent) => {
+    if (isTouch) return;
+    setImgPos({ x: e.clientX + 20, y: e.clientY - 80 });
+  }, [isTouch]);
 
   return (
     <section id="services" ref={ref} style={{ background:'#0D0B08', position:'relative' }}>
 
-      {/* floating image on hover */}
-      {hov !== null && (
+      {/* floating image on hover — desktop only */}
+      {!isTouch && hov !== null && (
         <div style={{
           position:'fixed', left: imgPos.x, top: imgPos.y,
           width:220, height:280, pointerEvents:'none', zIndex:100,
@@ -390,8 +398,8 @@ function Services() {
       <div style={{ borderTop:'1px solid rgba(197,212,192,.06)' }} onMouseMove={onMove}>
         {SVC_DATA.map((s, i) => (
           <div key={s.n}
-            onMouseEnter={() => setHov(i)} onMouseLeave={() => setHov(null)}
-            style={{ borderBottom:'1px solid rgba(197,212,192,.06)', cursor:'none', background: hov===i?'rgba(197,212,192,.025)':'transparent', transition:'background .2s ease' }}>
+            onMouseEnter={() => { if(!isTouch) setHov(i); }} onMouseLeave={() => setHov(null)}
+            style={{ borderBottom:'1px solid rgba(197,212,192,.06)', cursor: isTouch ? 'pointer' : 'none', background: hov===i?'rgba(197,212,192,.025)':'transparent', transition:'background .2s ease' }}>
             <div style={{ maxWidth:'1400px', margin:'0 auto', padding:'clamp(1rem,2.2vh,1.6rem) clamp(1.5rem,5vw,5rem)', display:'grid', gridTemplateColumns:'3rem 1fr auto', alignItems:'center', gap:'1.5rem' }}>
               <span style={{ fontFamily:"'Jost',sans-serif", fontSize:'.52rem', letterSpacing:'.18em', color: hov===i?'rgba(197,212,192,.5)':'rgba(197,212,192,.18)', fontWeight:500, transition:'color .2s' }}>{s.n}</span>
               <div style={{ display:'flex', alignItems:'baseline', flexWrap:'wrap', gap:'.4rem 3rem' }}>
