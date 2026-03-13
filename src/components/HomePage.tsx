@@ -197,14 +197,14 @@ function Hero() {
 
         {/* MEGA TYPE */}
         <div style={{ lineHeight:.84, ...anim(2,.1) }}>
-          <div style={{ fontFamily:"'Cormorant Garamond',serif", fontWeight:300, fontSize:'clamp(5rem,14.5vw,14rem)', letterSpacing:'-.04em', color:'#F0EDE6' }}>
+          <div style={{ fontFamily:"'Cormorant Garamond',serif", fontWeight:300, fontSize:'clamp(3.8rem,10vw,11rem)', letterSpacing:'-.04em', color:'#F0EDE6' }}>
             Wij maken
           </div>
-          <div style={{ fontFamily:"'Cormorant Garamond',serif", fontWeight:300, fontStyle:'italic', fontSize:'clamp(5rem,14.5vw,14rem)', letterSpacing:'-.04em', background:'linear-gradient(125deg,#C5D4C0 0%,#F0EDE6 38%,#8FA887 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>
+          <div style={{ fontFamily:"'Cormorant Garamond',serif", fontWeight:300, fontStyle:'italic', fontSize:'clamp(3.8rem,10vw,11rem)', letterSpacing:'-.04em', background:'linear-gradient(125deg,#C5D4C0 0%,#F0EDE6 38%,#8FA887 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>
             merken die
           </div>
           <div style={{ display:'flex', alignItems:'flex-end', gap:'clamp(1rem,3vw,3rem)', flexWrap:'wrap' }}>
-            <div style={{ fontFamily:"'Cormorant Garamond',serif", fontWeight:300, fontSize:'clamp(5rem,14.5vw,14rem)', letterSpacing:'-.04em', color:'rgba(240,237,230,.11)' }}>
+            <div style={{ fontFamily:"'Cormorant Garamond',serif", fontWeight:300, fontSize:'clamp(3.8rem,10vw,11rem)', letterSpacing:'-.04em', color:'rgba(240,237,230,.11)' }}>
               onthouden worden.
             </div>
             {/* animated counter pill — tucked beside last word */}
@@ -267,7 +267,7 @@ function ImageReel() {
         { src: IMG.womanLaptop,   pos: 'top center' },
         { src: IMG.foundersCouch, pos: 'top center' },
         { src: IMG.linen,         pos: 'center'     },
-        { src: IMG.portMock2,     pos: 'center'     },
+        { src: IMG.workspace,     pos: 'center'     },
       ].map(({ src, pos }, i) => (
         <div key={i} style={{ overflow:'hidden', position:'relative' }}>
           <img src={src} style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:pos, display:'block', transition:'transform 1s cubic-bezier(.25,.46,.45,.94)' }}
@@ -329,7 +329,7 @@ function Statement() {
    ══════════════════════════════════════════ */
 const SVC_DATA = [
   { n:'01', t:'Contentcreatie',  d:'Visuele content die stopt met scrollen en converteert naar klanten.',      img: IMG.brandDetail  },
-  { n:'02', t:'Template Design', d:'On-brand Canva templates voor een consistente en professionele feed.',      img: IMG.portMock2    },
+  { n:'02', t:'Template Design', d:'On-brand Canva templates voor een consistente en professionele feed.',      img: IMG.brandDetail  },
   { n:'03', t:'Social Media',    d:'Volledig kanaalbe­heer — van strategie tot community management.',          img: IMG.workspace    },
   { n:'04', t:'Fotografie',      d:'Professionele brand shoots voor een authentieke en premium uitstraling.',   img: IMG.womanWindow  },
   { n:'05', t:'Meta Ads',        d:'Gerichte campagnes die meetbare leads genereren en ROAS leveren.',          img: IMG.shopifyBag   },
@@ -474,7 +474,7 @@ function Testimonial() {
    ══════════════════════════════════════════ */
 const PORT = [
   { img: IMG.womanLaptop,  label:'Brand Strategie',   client:'Lifestyle Merk',  tall:true  },
-  { img: IMG.portMock2,    label:'Social Templates',  client:'E-commerce Brand',tall:false },
+  { img: IMG.brandDetail,  label:'Social Templates',  client:'E-commerce Brand',tall:false },
   { img: IMG.brandDetail,  label:'Content Creatie',   client:'Fashion Label',   tall:false },
   { img: IMG.workspace,    label:'Brand Identity',    client:'Beauty Clinic',   tall:true  },
   { img: IMG.shopifyBag,   label:'Campagne Creatie',  client:'Online Retailer', tall:false },
